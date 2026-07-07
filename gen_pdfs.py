@@ -62,7 +62,7 @@ def header(c, title):
     c.drawString(MARGIN, PAGE_H - 55, title)
     c.setFillColor(GOLD)
     c.setFont("Helvetica", 11)
-    c.drawString(MARGIN, PAGE_H - 74, "Amanthos AG · Zürichstrasse 44 · 6004 Luzern")
+    c.drawString(MARGIN, PAGE_H - 74, "Amanthos AG · Früemattli 1 · 6404 Greppen")
 
 
 def meta_fields(c, prefix):

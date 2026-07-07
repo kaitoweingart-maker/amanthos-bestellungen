@@ -16,97 +16,514 @@
   header {
     background: #1a1a2e;
     color: #fff;
-    padding: 48px 24px 40px;
+    padding: 28px 20px 24px;
     text-align: center;
   }
-  header h1 { font-size: 1.9rem; font-weight: 700; letter-spacing: 0.5px; }
-  header p { color: #b8963e; margin-top: 8px; font-size: 1rem; }
-  main { max-width: 760px; margin: 0 auto; padding: 40px 24px 64px; }
-  .intro {
-    background: #fff;
-    border-left: 4px solid #b8963e;
-    padding: 20px 24px;
-    border-radius: 6px;
-    margin-bottom: 32px;
-    font-size: 0.95rem;
-    line-height: 1.6;
+  header h1 { font-size: 1.6rem; font-weight: 700; letter-spacing: 0.5px; }
+  header p { color: #b8963e; margin-top: 6px; font-size: 0.9rem; }
+  .lang {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 16px;
   }
-  .intro ol { margin: 10px 0 0 20px; }
-  .cards { display: grid; gap: 20px; }
-  .card {
+  .lang button {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.35);
+    color: #fff;
+    padding: 7px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+  }
+  .lang button.active { background: #b8963e; border-color: #b8963e; font-weight: 700; }
+  main { max-width: 640px; margin: 0 auto; padding: 20px 16px 64px; }
+  .box {
     background: #fff;
     border-radius: 10px;
-    padding: 28px;
+    padding: 20px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 8px rgba(26,26,46,0.08);
+  }
+  .box h2 { font-size: 1.1rem; margin-bottom: 14px; }
+  label { display: block; font-size: 0.85rem; color: #666; margin: 10px 0 4px; }
+  input[type=text], textarea, select {
+    width: 100%;
+    padding: 11px 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    background: #fff;
+  }
+  textarea { min-height: 70px; resize: vertical; }
+  .item {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 16px;
-    box-shadow: 0 2px 8px rgba(26,26,46,0.08);
-    flex-wrap: wrap;
+    gap: 10px;
+    padding: 9px 0;
+    border-bottom: 1px solid #f0ede6;
   }
-  .card h2 { font-size: 1.2rem; margin-bottom: 6px; }
-  .card p { color: #666; font-size: 0.9rem; }
-  .btn {
-    display: inline-block;
+  .item:last-child { border-bottom: none; }
+  .item span { font-size: 0.95rem; flex: 1; }
+  .qty { display: flex; align-items: center; gap: 6px; }
+  .qty button {
+    width: 34px; height: 34px;
+    border: 1px solid #ccc;
+    background: #f8f6f2;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: #1a1a2e;
+    line-height: 1;
+  }
+  .qty input {
+    width: 52px; height: 34px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+  }
+  .qty input:not(:placeholder-shown), .qty input.filled { border-color: #b8963e; background: #fdf9f0; }
+  .photo-add {
+    display: block;
+    width: 100%;
+    padding: 14px;
     background: #1a1a2e;
     color: #fff;
-    text-decoration: none;
-    padding: 12px 22px;
-    border-radius: 6px;
-    font-size: 0.95rem;
-    white-space: nowrap;
-    transition: background 0.2s;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
   }
-  .btn:hover { background: #b8963e; }
-  footer {
-    text-align: center;
-    color: #999;
-    font-size: 0.85rem;
-    padding: 24px;
+  .photo-card {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 12px 0;
+    border-bottom: 1px solid #f0ede6;
   }
-  footer a { color: #b8963e; }
+  .photo-card img {
+    width: 84px; height: 84px;
+    object-fit: cover;
+    border-radius: 8px;
+    flex-shrink: 0;
+  }
+  .photo-card .meta { flex: 1; }
+  .photo-card .meta input[type=text] { margin-bottom: 8px; font-size: 0.9rem; padding: 8px 10px; }
+  .photo-card .remove {
+    background: none; border: none;
+    color: #c0392b;
+    font-size: 1.3rem;
+    cursor: pointer;
+    padding: 4px;
+  }
+  .submit {
+    width: 100%;
+    padding: 16px;
+    background: #b8963e;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .submit:disabled { opacity: 0.6; cursor: wait; }
+  .msg { padding: 14px 16px; border-radius: 8px; margin-bottom: 16px; font-size: 0.95rem; display: none; }
+  .msg.ok { background: #e8f6ee; color: #1e7d45; display: block; }
+  .msg.err { background: #fdeaea; color: #b03030; display: block; }
+  .msg.info { background: #fdf6e6; color: #8a6d1f; display: block; }
+  .pdf-links { text-align: center; font-size: 0.85rem; color: #999; }
+  .pdf-links a { color: #b8963e; }
+  footer { text-align: center; color: #999; font-size: 0.85rem; padding: 24px; }
 </style>
 </head>
 <body>
 <header>
-  <h1>Amanthos – Bestellungen</h1>
-  <p>Bestellformulare für Verbrauchsmaterial</p>
+  <h1 data-i18n="title">Amanthos – Bestellungen</h1>
+  <p>Amanthos AG · Früemattli 1 · 6404 Greppen</p>
+  <div class="lang">
+    <button data-lang="de">Deutsch</button>
+    <button data-lang="en">English</button>
+    <button data-lang="pl">Polski</button>
+  </div>
 </header>
 <main>
-  <div class="intro">
-    <strong>So funktioniert's:</strong>
-    <ol>
-      <li>Formular öffnen und direkt im Browser oder PDF-Reader ausfüllen (Menge und, falls bekannt, Preis eintragen).</li>
-      <li>Ausgefülltes PDF speichern und per E-Mail an <a href="mailto:kaito.weingart@amanthos.com">kaito.weingart@amanthos.com</a> senden.</li>
-      <li>Positionen ohne Häkchen bei «Bezahlt» werden durch die Buchhaltung beglichen.</li>
-    </ol>
+  <div class="box">
+    <h2 data-i18n="yourDetails">Deine Angaben</h2>
+    <label data-i18n="location">Objekt / Standort</label>
+    <input type="text" id="location" autocomplete="off">
+    <label data-i18n="name">Name</label>
+    <input type="text" id="name" autocomplete="name">
   </div>
-  <div class="cards">
-    <div class="card">
-      <div>
-        <h2>🥐 Frühstück</h2>
-        <p>Gipfeli, Brot, Milchprodukte, Kaffee, Säfte &amp; Co.</p>
-      </div>
-      <a class="btn" href="pdf/bestellung-fruehstueck.pdf">Formular öffnen</a>
-    </div>
-    <div class="card">
-      <div>
-        <h2>🧴 Reinigungsmaterial</h2>
-        <p>Reiniger, Abfallsäcke, Papier, Handschuhe &amp; Co.</p>
-      </div>
-      <a class="btn" href="pdf/bestellung-reinigungsmaterial.pdf">Formular öffnen</a>
-    </div>
-    <div class="card">
-      <div>
-        <h2>🛏️ Wäsche</h2>
-        <p>Bettlaken, Duvet- &amp; Kissenbezüge, Frottierwäsche.</p>
-      </div>
-      <a class="btn" href="pdf/bestellung-waesche.pdf">Formular öffnen</a>
-    </div>
+
+  <div id="categories"></div>
+
+  <div class="box">
+    <h2><span data-i18n="photoTitle">📷 Artikel fotografieren</span></h2>
+    <p style="font-size:0.85rem;color:#888;margin-bottom:12px;" data-i18n="photoHint">
+      Artikel nicht in der Liste? Fotografiere ihn und gib die benötigte Anzahl an.
+    </p>
+    <div id="photoList"></div>
+    <button type="button" class="photo-add" id="photoAdd" data-i18n="photoAdd">📷 Foto aufnehmen</button>
+    <input type="file" id="photoInput" accept="image/*" capture="environment" hidden>
   </div>
+
+  <div class="box">
+    <label data-i18n="remarks">Bemerkungen</label>
+    <textarea id="remarks"></textarea>
+  </div>
+
+  <div class="msg" id="msg"></div>
+  <button class="submit" id="submit" data-i18n="submit">Bestellung senden</button>
+
+  <p class="pdf-links" style="margin-top:24px;">
+    <span data-i18n="pdfAlt">Alternativ als PDF:</span>
+    <a href="pdf/bestellung-fruehstueck.pdf" data-i18n="catBreakfast">Frühstück</a> ·
+    <a href="pdf/bestellung-reinigungsmaterial.pdf" data-i18n="catCleaning">Reinigung</a> ·
+    <a href="pdf/bestellung-waesche.pdf" data-i18n="catLinen">Wäsche</a>
+  </p>
 </main>
-<footer>
-  Amanthos AG · Zürichstrasse 44 · 6004 Luzern
-</footer>
+<footer>Amanthos AG · Früemattli 1 · 6404 Greppen</footer>
+
+<script>
+const API = 'https://amanthos-website-api.onrender.com';
+
+const I18N = {
+  de: {
+    title: 'Amanthos – Bestellungen',
+    yourDetails: 'Deine Angaben',
+    location: 'Objekt / Standort',
+    name: 'Name',
+    catBreakfast: '🥐 Frühstück',
+    catCleaning: '🧴 Reinigungsmaterial',
+    catLinen: '🛏️ Wäsche',
+    photoTitle: '📷 Artikel fotografieren',
+    photoHint: 'Artikel nicht in der Liste? Fotografiere ihn und gib die benötigte Anzahl an.',
+    photoAdd: '📷 Foto aufnehmen',
+    photoNote: 'Beschreibung (optional)',
+    qtyNeeded: 'Anzahl benötigt',
+    remarks: 'Bemerkungen',
+    submit: 'Bestellung senden',
+    sending: 'Wird gesendet… (kann bis zu 1 Minute dauern)',
+    success: '✓ Bestellung erfolgreich übermittelt! Referenz: ',
+    errEmpty: 'Bitte mindestens einen Artikel oder ein Foto angeben.',
+    errFields: 'Bitte Objekt/Standort und Name ausfüllen.',
+    errSend: 'Senden fehlgeschlagen — bitte nochmals versuchen.',
+    pdfAlt: 'Alternativ als PDF:',
+  },
+  en: {
+    title: 'Amanthos – Orders',
+    yourDetails: 'Your details',
+    location: 'Property / location',
+    name: 'Name',
+    catBreakfast: '🥐 Breakfast',
+    catCleaning: '🧴 Cleaning supplies',
+    catLinen: '🛏️ Linen',
+    photoTitle: '📷 Photograph an item',
+    photoHint: 'Item not in the list? Take a photo and enter the quantity needed.',
+    photoAdd: '📷 Take photo',
+    photoNote: 'Description (optional)',
+    qtyNeeded: 'Quantity needed',
+    remarks: 'Remarks',
+    submit: 'Submit order',
+    sending: 'Sending… (may take up to 1 minute)',
+    success: '✓ Order submitted successfully! Reference: ',
+    errEmpty: 'Please add at least one item or photo.',
+    errFields: 'Please fill in property/location and name.',
+    errSend: 'Sending failed — please try again.',
+    pdfAlt: 'Alternatively as PDF:',
+  },
+  pl: {
+    title: 'Amanthos – Zamówienia',
+    yourDetails: 'Twoje dane',
+    location: 'Obiekt / lokalizacja',
+    name: 'Imię i nazwisko',
+    catBreakfast: '🥐 Śniadanie',
+    catCleaning: '🧴 Środki czystości',
+    catLinen: '🛏️ Pościel i ręczniki',
+    photoTitle: '📷 Zrób zdjęcie artykułu',
+    photoHint: 'Artykułu nie ma na liście? Zrób zdjęcie i podaj potrzebną ilość.',
+    photoAdd: '📷 Zrób zdjęcie',
+    photoNote: 'Opis (opcjonalnie)',
+    qtyNeeded: 'Potrzebna ilość',
+    remarks: 'Uwagi',
+    submit: 'Wyślij zamówienie',
+    sending: 'Wysyłanie… (może potrwać do 1 minuty)',
+    success: '✓ Zamówienie wysłane! Numer: ',
+    errEmpty: 'Dodaj przynajmniej jeden artykuł lub zdjęcie.',
+    errFields: 'Wypełnij pola obiekt/lokalizacja i imię.',
+    errSend: 'Wysyłanie nie powiodło się — spróbuj ponownie.',
+    pdfAlt: 'Alternatywnie jako PDF:',
+  },
+};
+
+// Article catalogue — de name is sent to the backend, translations shown in UI
+const CATALOGUE = [
+  { key: 'catBreakfast', category: 'Frühstück', items: [
+    { de: 'Gipfeli', en: 'Croissants', pl: 'Rogaliki' },
+    { de: 'Brot / Brötchen', en: 'Bread / rolls', pl: 'Chleb / bułki' },
+    { de: 'Butter', en: 'Butter', pl: 'Masło' },
+    { de: 'Konfitüre', en: 'Jam', pl: 'Dżem' },
+    { de: 'Honig', en: 'Honey', pl: 'Miód' },
+    { de: 'Käse', en: 'Cheese', pl: 'Ser' },
+    { de: 'Fleisch-Aufschnitt', en: 'Cold cuts', pl: 'Wędliny' },
+    { de: 'Joghurt', en: 'Yoghurt', pl: 'Jogurt' },
+    { de: 'Müsli / Cornflakes', en: 'Muesli / cornflakes', pl: 'Musli / płatki' },
+    { de: 'Milch', en: 'Milk', pl: 'Mleko' },
+    { de: 'Kaffee (Bohnen)', en: 'Coffee (beans)', pl: 'Kawa (ziarna)' },
+    { de: 'Tee', en: 'Tea', pl: 'Herbata' },
+    { de: 'Orangensaft', en: 'Orange juice', pl: 'Sok pomarańczowy' },
+    { de: 'Eier', en: 'Eggs', pl: 'Jajka' },
+    { de: 'Früchte', en: 'Fruit', pl: 'Owoce' },
+    { de: 'Zucker / Süssstoff', en: 'Sugar / sweetener', pl: 'Cukier / słodzik' },
+  ]},
+  { key: 'catCleaning', category: 'Reinigungsmaterial', items: [
+    { de: 'Allzweckreiniger', en: 'All-purpose cleaner', pl: 'Płyn uniwersalny' },
+    { de: 'Badreiniger / Kalklöser', en: 'Bathroom cleaner / limescale remover', pl: 'Płyn do łazienek / odkamieniacz' },
+    { de: 'WC-Reiniger', en: 'Toilet cleaner', pl: 'Płyn do WC' },
+    { de: 'Glasreiniger', en: 'Glass cleaner', pl: 'Płyn do szyb' },
+    { de: 'Bodenreiniger', en: 'Floor cleaner', pl: 'Płyn do podłóg' },
+    { de: 'Geschirrspülmittel', en: 'Dish soap', pl: 'Płyn do naczyń' },
+    { de: 'Geschirrspültabs', en: 'Dishwasher tabs', pl: 'Tabletki do zmywarki' },
+    { de: 'Waschmittel', en: 'Laundry detergent', pl: 'Środek do prania' },
+    { de: 'Abfallsäcke 35 l', en: 'Bin bags 35 l', pl: 'Worki na śmieci 35 l' },
+    { de: 'Abfallsäcke 110 l', en: 'Bin bags 110 l', pl: 'Worki na śmieci 110 l' },
+    { de: 'Putzhandschuhe', en: 'Cleaning gloves', pl: 'Rękawice ochronne' },
+    { de: 'Schwämme', en: 'Sponges', pl: 'Gąbki' },
+    { de: 'Mikrofasertücher', en: 'Microfibre cloths', pl: 'Ściereczki z mikrofibry' },
+    { de: 'WC-Papier', en: 'Toilet paper', pl: 'Papier toaletowy' },
+    { de: 'Haushaltspapier', en: 'Paper towels', pl: 'Ręczniki papierowe' },
+    { de: 'Handseife', en: 'Hand soap', pl: 'Mydło w płynie' },
+  ]},
+  { key: 'catLinen', category: 'Wäsche', items: [
+    { de: 'Fixleintuch 90 × 200', en: 'Fitted sheet 90 × 200', pl: 'Prześcieradło z gumką 90 × 200' },
+    { de: 'Fixleintuch 160 × 200', en: 'Fitted sheet 160 × 200', pl: 'Prześcieradło z gumką 160 × 200' },
+    { de: 'Fixleintuch 180 × 200', en: 'Fitted sheet 180 × 200', pl: 'Prześcieradło z gumką 180 × 200' },
+    { de: 'Duvetbezug 160 × 210', en: 'Duvet cover 160 × 210', pl: 'Poszwa na kołdrę 160 × 210' },
+    { de: 'Duvetbezug 200 × 210', en: 'Duvet cover 200 × 210', pl: 'Poszwa na kołdrę 200 × 210' },
+    { de: 'Kissenbezug 65 × 65', en: 'Pillowcase 65 × 65', pl: 'Poszewka 65 × 65' },
+    { de: 'Kissenbezug 50 × 70', en: 'Pillowcase 50 × 70', pl: 'Poszewka 50 × 70' },
+    { de: 'Duvet', en: 'Duvet', pl: 'Kołdra' },
+    { de: 'Kissen', en: 'Pillow', pl: 'Poduszka' },
+    { de: 'Badetücher', en: 'Bath towels', pl: 'Ręczniki kąpielowe' },
+    { de: 'Handtücher', en: 'Hand towels', pl: 'Ręczniki' },
+    { de: 'Gästetücher', en: 'Guest towels', pl: 'Ręczniki dla gości' },
+    { de: 'Badteppiche', en: 'Bath mats', pl: 'Dywaniki łazienkowe' },
+    { de: 'Küchentücher', en: 'Kitchen towels', pl: 'Ścierki kuchenne' },
+  ]},
+];
+
+let lang = localStorage.getItem('amanthos-lang') || 'de';
+const photos = []; // {blobDataUrl, qty, note}
+
+function t(key) { return I18N[lang][key] || I18N.de[key] || key; }
+
+function applyLang() {
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    el.textContent = t(el.dataset.i18n);
+  });
+  document.querySelectorAll('.lang button').forEach(b => {
+    b.classList.toggle('active', b.dataset.lang === lang);
+  });
+  document.querySelectorAll('#categories .item span').forEach(el => {
+    const item = JSON.parse(el.dataset.item);
+    el.textContent = item[lang] || item.de;
+  });
+  document.querySelectorAll('.photo-card input[data-role=note]').forEach(el => {
+    el.placeholder = t('photoNote');
+  });
+  document.querySelectorAll('.photo-card label').forEach(el => {
+    el.textContent = t('qtyNeeded');
+  });
+  document.title = t('title');
+}
+
+function buildCategories() {
+  const wrap = document.getElementById('categories');
+  CATALOGUE.forEach((cat, ci) => {
+    const box = document.createElement('div');
+    box.className = 'box';
+    const h = document.createElement('h2');
+    h.dataset.i18n = cat.key;
+    box.appendChild(h);
+    cat.items.forEach((item, ii) => {
+      const row = document.createElement('div');
+      row.className = 'item';
+      const label = document.createElement('span');
+      label.dataset.item = JSON.stringify(item);
+      row.appendChild(label);
+      const qty = document.createElement('div');
+      qty.className = 'qty';
+      const minus = document.createElement('button');
+      minus.type = 'button'; minus.textContent = '−';
+      const input = document.createElement('input');
+      input.type = 'tel'; input.inputMode = 'numeric'; input.placeholder = '';
+      input.id = `qty-${ci}-${ii}`;
+      const plus = document.createElement('button');
+      plus.type = 'button'; plus.textContent = '+';
+      minus.onclick = () => { const v = Math.max(0, (parseInt(input.value) || 0) - 1); input.value = v || ''; };
+      plus.onclick = () => { input.value = (parseInt(input.value) || 0) + 1; };
+      qty.append(minus, input, plus);
+      row.appendChild(qty);
+      box.appendChild(row);
+    });
+    wrap.appendChild(box);
+  });
+}
+
+// ── Photo handling ──
+function compressImage(file) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    const url = URL.createObjectURL(file);
+    img.onload = () => {
+      URL.revokeObjectURL(url);
+      const MAX = 1200;
+      let { width, height } = img;
+      if (width > MAX || height > MAX) {
+        const s = MAX / Math.max(width, height);
+        width = Math.round(width * s);
+        height = Math.round(height * s);
+      }
+      const canvas = document.createElement('canvas');
+      canvas.width = width; canvas.height = height;
+      canvas.getContext('2d').drawImage(img, 0, 0, width, height);
+      resolve(canvas.toDataURL('image/jpeg', 0.72));
+    };
+    img.onerror = reject;
+    img.src = url;
+  });
+}
+
+function renderPhotos() {
+  const list = document.getElementById('photoList');
+  list.innerHTML = '';
+  photos.forEach((ph, i) => {
+    const card = document.createElement('div');
+    card.className = 'photo-card';
+    const img = document.createElement('img');
+    img.src = ph.data;
+    const meta = document.createElement('div');
+    meta.className = 'meta';
+    const note = document.createElement('input');
+    note.type = 'text';
+    note.dataset.role = 'note';
+    note.placeholder = t('photoNote');
+    note.value = ph.note;
+    note.oninput = () => { ph.note = note.value; };
+    const qlabel = document.createElement('label');
+    qlabel.textContent = t('qtyNeeded');
+    qlabel.style.margin = '0 0 4px';
+    const qty = document.createElement('div');
+    qty.className = 'qty';
+    const minus = document.createElement('button');
+    minus.type = 'button'; minus.textContent = '−';
+    const qinput = document.createElement('input');
+    qinput.type = 'tel'; qinput.inputMode = 'numeric';
+    qinput.value = ph.qty || '';
+    qinput.oninput = () => { ph.qty = qinput.value; };
+    const plus = document.createElement('button');
+    plus.type = 'button'; plus.textContent = '+';
+    minus.onclick = () => { ph.qty = String(Math.max(0, (parseInt(ph.qty) || 0) - 1) || ''); qinput.value = ph.qty; };
+    plus.onclick = () => { ph.qty = String((parseInt(ph.qty) || 0) + 1); qinput.value = ph.qty; };
+    qty.append(minus, qinput, plus);
+    meta.append(note, qlabel, qty);
+    const rm = document.createElement('button');
+    rm.className = 'remove'; rm.type = 'button'; rm.textContent = '✕';
+    rm.onclick = () => { photos.splice(i, 1); renderPhotos(); };
+    card.append(img, meta, rm);
+    list.appendChild(card);
+  });
+}
+
+document.getElementById('photoAdd').onclick = () => {
+  if (photos.length >= 10) return;
+  document.getElementById('photoInput').click();
+};
+document.getElementById('photoInput').onchange = async (e) => {
+  const file = e.target.files[0];
+  e.target.value = '';
+  if (!file) return;
+  try {
+    const data = await compressImage(file);
+    photos.push({ data, qty: '1', note: '' });
+    renderPhotos();
+  } catch { /* ignore unreadable image */ }
+};
+
+// ── Submit ──
+function showMsg(cls, text) {
+  const m = document.getElementById('msg');
+  m.className = 'msg ' + cls;
+  m.textContent = text;
+  if (cls) m.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+document.getElementById('submit').onclick = async () => {
+  const location = document.getElementById('location').value.trim();
+  const name = document.getElementById('name').value.trim();
+  if (!location || !name) { showMsg('err', t('errFields')); return; }
+
+  const items = [];
+  CATALOGUE.forEach((cat, ci) => {
+    cat.items.forEach((item, ii) => {
+      const v = parseInt(document.getElementById(`qty-${ci}-${ii}`).value);
+      if (v > 0) items.push({ category: cat.category, article: item.de, qty: String(v) });
+    });
+  });
+  const photoPayload = photos
+    .filter(ph => parseInt(ph.qty) > 0)
+    .map(ph => ({ data: ph.data, qty: String(parseInt(ph.qty)), note: ph.note.trim() }));
+
+  if (!items.length && !photoPayload.length) { showMsg('err', t('errEmpty')); return; }
+
+  const btn = document.getElementById('submit');
+  btn.disabled = true;
+  showMsg('info', t('sending'));
+
+  try {
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), 90000);
+    const res = await fetch(API + '/api/supply-orders', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        language: lang, location, name, items, photos: photoPayload,
+        remarks: document.getElementById('remarks').value.trim(),
+      }),
+      signal: ctrl.signal,
+    });
+    clearTimeout(timer);
+    const out = await res.json();
+    if (res.ok && out.ok) {
+      showMsg('ok', t('success') + out.orderId);
+      document.querySelectorAll('#categories .qty input').forEach(i => i.value = '');
+      photos.length = 0;
+      renderPhotos();
+      document.getElementById('remarks').value = '';
+    } else {
+      showMsg('err', t('errSend'));
+    }
+  } catch {
+    showMsg('err', t('errSend'));
+  } finally {
+    btn.disabled = false;
+  }
+};
+
+// ── Language switcher ──
+document.querySelectorAll('.lang button').forEach(b => {
+  b.onclick = () => { lang = b.dataset.lang; localStorage.setItem('amanthos-lang', lang); applyLang(); };
+});
+
+buildCategories();
+applyLang();
+
+// Warm up the Render backend (free tier cold start) as soon as the page opens
+fetch(API + '/health').catch(() => {});
+</script>
 </body>
 </html>
