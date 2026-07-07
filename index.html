@@ -153,7 +153,14 @@
   <div class="box">
     <h2 data-i18n="yourDetails">Deine Angaben</h2>
     <label data-i18n="location">Objekt / Standort</label>
-    <input type="text" id="location" autocomplete="off">
+    <select id="location">
+      <option value="" data-i18n="locationPick">— Bitte wählen —</option>
+      <option>Prize by Radisson Zürich</option>
+      <option>Chalet Swiss Interlaken</option>
+      <option>Hotel Mulin</option>
+      <option>Amanthos Living Zürich Airport</option>
+      <option>Amanthos Living Nyon</option>
+    </select>
     <label data-i18n="name">Name</label>
     <input type="text" id="name" autocomplete="name">
   </div>
@@ -195,6 +202,7 @@ const I18N = {
     title: 'Amanthos – Bestellungen',
     yourDetails: 'Deine Angaben',
     location: 'Objekt / Standort',
+    locationPick: '— Bitte wählen —',
     name: 'Name',
     catBreakfast: '🥐 Frühstück',
     catCleaning: '🧴 Reinigungsmaterial',
@@ -217,6 +225,7 @@ const I18N = {
     title: 'Amanthos – Orders',
     yourDetails: 'Your details',
     location: 'Property / location',
+    locationPick: '— Please select —',
     name: 'Name',
     catBreakfast: '🥐 Breakfast',
     catCleaning: '🧴 Cleaning supplies',
@@ -239,6 +248,7 @@ const I18N = {
     title: 'Amanthos – Zamówienia',
     yourDetails: 'Twoje dane',
     location: 'Obiekt / lokalizacja',
+    locationPick: '— Wybierz —',
     name: 'Imię i nazwisko',
     catBreakfast: '🥐 Śniadanie',
     catCleaning: '🧴 Środki czystości',
