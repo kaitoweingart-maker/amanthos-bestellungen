@@ -17,9 +17,10 @@ FORMS = {
     "bestellung-fruehstueck": {
         "title": "Bestellformular – Frühstück",
         "items": [
-            "Gipfeli", "Brot / Brötchen", "Butter", "Konfitüre", "Honig",
-            "Käse", "Fleisch-Aufschnitt", "Joghurt", "Müsli / Cornflakes",
-            "Milch", "Kaffee (Bohnen)", "Tee", "Orangensaft", "Eier",
+            "Gipfeli", "Buttergipfel TK", "Tischbrötli TK", "Brot / Brötchen",
+            "Toastbrot", "Rührei-Mix 1kg (EIFIX)", "Butter", "Butter-Portionen 10g",
+            "Konfitüre", "Portionenkonfitüre", "Honig", "Käse", "Fleisch-Aufschnitt",
+            "Joghurt", "Müsli / Cornflakes", "Milch", "Orangensaft", "Eier",
             "Früchte", "Zucker / Süssstoff",
         ],
         "extra_rows": 4,
@@ -32,8 +33,18 @@ FORMS = {
             "Geschirrspültabs", "Waschmittel", "Abfallsäcke 35 l",
             "Abfallsäcke 110 l", "Putzhandschuhe", "Schwämme",
             "Mikrofasertücher", "WC-Papier", "Haushaltspapier", "Handseife",
+            "Kosmetiktücher", "Duschgel-Sachets 12ml", "All-in-One Duschmittel 300ml",
+            "Seife Flowpack", "Vanity-Set (Wattepads)", "Spenderservietten",
         ],
         "extra_rows": 4,
+    },
+    "bestellung-kaffee": {
+        "title": "Bestellformular – Kaffee & Tee",
+        "items": [
+            "Turm Mokka Bohnen 1kg", "CoffeeB Balls Lungo", "CoffeeB Balls Espresso",
+            "Tee-Sortiment", "Kaffeerahm-Portionen", "Zucker-Sticks",
+        ],
+        "extra_rows": 6,
     },
     "bestellung-waesche": {
         "title": "Bestellformular – Wäsche",

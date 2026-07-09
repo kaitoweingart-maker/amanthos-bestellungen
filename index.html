@@ -191,7 +191,8 @@
     <span data-i18n="pdfAlt">Alternativ als PDF:</span>
     <a href="pdf/bestellung-fruehstueck.pdf" data-i18n="catBreakfast">Frühstück</a> ·
     <a href="pdf/bestellung-reinigungsmaterial.pdf" data-i18n="catCleaning">Reinigung</a> ·
-    <a href="pdf/bestellung-waesche.pdf" data-i18n="catLinen">Wäsche</a>
+    <a href="pdf/bestellung-waesche.pdf" data-i18n="catLinen">Wäsche</a> ·
+    <a href="pdf/bestellung-kaffee.pdf" data-i18n="catCoffee">Kaffee</a>
   </p>
 </main>
 <footer>Amanthos AG · Früemattli 1 · 6404 Greppen · Bestellportal V2.1</footer>
@@ -209,6 +210,7 @@ const I18N = {
     email: 'E-Mail (für die Bestell-Bestätigung)',
     errEmail: 'Bitte eine gültige E-Mail-Adresse angeben.',
     catBreakfast: '🥐 Frühstück',
+    catCoffee: '☕ Kaffee & Tee',
     catCleaning: '🧴 Reinigungsmaterial',
     catLinen: '🛏️ Wäsche',
     photoTitle: '📷 Artikel fotografieren',
@@ -234,6 +236,7 @@ const I18N = {
     email: 'E-mail (for the order confirmation)',
     errEmail: 'Please enter a valid e-mail address.',
     catBreakfast: '🥐 Breakfast',
+    catCoffee: '☕ Coffee & tea',
     catCleaning: '🧴 Cleaning supplies',
     catLinen: '🛏️ Linen',
     photoTitle: '📷 Photograph an item',
@@ -259,6 +262,7 @@ const I18N = {
     email: 'E-mail (do potwierdzenia zamówienia)',
     errEmail: 'Podaj prawidłowy adres e-mail.',
     catBreakfast: '🥐 Śniadanie',
+    catCoffee: '☕ Kawa i herbata',
     catCleaning: '🧴 Środki czystości',
     catLinen: '🛏️ Pościel i ręczniki',
     photoTitle: '📷 Zrób zdjęcie artykułu',
@@ -281,8 +285,14 @@ const I18N = {
 const CATALOGUE = [
   { key: 'catBreakfast', category: 'Frühstück', items: [
     { de: 'Gipfeli', en: 'Croissants', pl: 'Rogaliki' },
+    { de: 'Buttergipfel TK', en: 'Butter croissants (frozen)', pl: 'Rogaliki maślane (mrożone)' },
+    { de: 'Tischbrötli TK', en: 'Table rolls (frozen)', pl: 'Bułeczki (mrożone)' },
     { de: 'Brot / Brötchen', en: 'Bread / rolls', pl: 'Chleb / bułki' },
+    { de: 'Toastbrot', en: 'Toast bread', pl: 'Chleb tostowy' },
+    { de: 'Rührei-Mix 1kg (EIFIX)', en: 'Scrambled egg mix 1kg', pl: 'Masa jajeczna 1kg' },
     { de: 'Butter', en: 'Butter', pl: 'Masło' },
+    { de: 'Butter-Portionen 10g', en: 'Butter portions 10g', pl: 'Masło porcjowane 10g' },
+    { de: 'Portionenkonfitüre', en: 'Jam portions', pl: 'Dżem porcjowany' },
     { de: 'Konfitüre', en: 'Jam', pl: 'Dżem' },
     { de: 'Honig', en: 'Honey', pl: 'Miód' },
     { de: 'Käse', en: 'Cheese', pl: 'Ser' },
@@ -290,8 +300,6 @@ const CATALOGUE = [
     { de: 'Joghurt', en: 'Yoghurt', pl: 'Jogurt' },
     { de: 'Müsli / Cornflakes', en: 'Muesli / cornflakes', pl: 'Musli / płatki' },
     { de: 'Milch', en: 'Milk', pl: 'Mleko' },
-    { de: 'Kaffee (Bohnen)', en: 'Coffee (beans)', pl: 'Kawa (ziarna)' },
-    { de: 'Tee', en: 'Tea', pl: 'Herbata' },
     { de: 'Orangensaft', en: 'Orange juice', pl: 'Sok pomarańczowy' },
     { de: 'Eier', en: 'Eggs', pl: 'Jajka' },
     { de: 'Früchte', en: 'Fruit', pl: 'Owoce' },
@@ -314,6 +322,20 @@ const CATALOGUE = [
     { de: 'WC-Papier', en: 'Toilet paper', pl: 'Papier toaletowy' },
     { de: 'Haushaltspapier', en: 'Paper towels', pl: 'Ręczniki papierowe' },
     { de: 'Handseife', en: 'Hand soap', pl: 'Mydło w płynie' },
+    { de: 'Kosmetiktücher', en: 'Facial tissues', pl: 'Chusteczki kosmetyczne' },
+    { de: 'Duschgel-Sachets 12ml', en: 'Shower gel sachets 12ml', pl: 'Saszetki żelu pod prysznic 12ml' },
+    { de: 'All-in-One Duschmittel 300ml', en: 'All-in-one wash 300ml', pl: 'Płyn all-in-one 300ml' },
+    { de: 'Seife Flowpack', en: 'Soap flowpack', pl: 'Mydełka hotelowe' },
+    { de: 'Vanity-Set (Wattepads)', en: 'Vanity set (cotton pads)', pl: 'Zestaw kosmetyczny (płatki)' },
+    { de: 'Spenderservietten', en: 'Dispenser napkins', pl: 'Serwetki do podajnika' },
+  ]},
+  { key: 'catCoffee', category: 'Kaffee & Tee', items: [
+    { de: 'Turm Mokka Bohnen 1kg', en: 'Turm Mokka coffee beans 1kg', pl: 'Kawa ziarnista Turm Mokka 1kg' },
+    { de: 'CoffeeB Balls Lungo', en: 'CoffeeB balls Lungo', pl: 'CoffeeB balls Lungo' },
+    { de: 'CoffeeB Balls Espresso', en: 'CoffeeB balls Espresso', pl: 'CoffeeB balls Espresso' },
+    { de: 'Tee-Sortiment', en: 'Tea assortment', pl: 'Herbata (różne)' },
+    { de: 'Kaffeerahm-Portionen', en: 'Coffee cream portions', pl: 'Śmietanka do kawy (porcje)' },
+    { de: 'Zucker-Sticks', en: 'Sugar sticks', pl: 'Cukier w saszetkach' },
   ]},
   { key: 'catLinen', category: 'Wäsche', items: [
     { de: 'Fixleintuch 90 × 200', en: 'Fitted sheet 90 × 200', pl: 'Prześcieradło z gumką 90 × 200' },
