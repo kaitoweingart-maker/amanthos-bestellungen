@@ -26,6 +26,16 @@
   .supplier a.go { flex-shrink: 0; background: #1a1a2e; color: #fff; text-decoration: none; padding: 10px 16px; border-radius: 8px; font-size: 0.9rem; font-weight: 700; white-space: nowrap; }
   .supplier a.go:hover { background: #b8963e; }
   .order-link { display: block; text-align: center; background: #b8963e; color: #fff; text-decoration: none; padding: 15px; border-radius: 10px; font-size: 1.05rem; font-weight: 700; margin-bottom: 16px; }
+  details.top { margin-top: 4px; }
+  details.top summary { cursor: pointer; font-size: 0.85rem; color: #b8963e; font-weight: 600; padding: 6px 0; list-style: none; }
+  details.top summary::before { content: '▸ '; }
+  details.top[open] summary::before { content: '▾ '; }
+  details.top table { width: 100%; border-collapse: collapse; font-size: 0.8rem; margin: 4px 0 8px; }
+  details.top th { text-align: left; padding: 5px 6px; background: #f2f0eb; color: #666; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.4px; }
+  details.top td { padding: 5px 6px; border-bottom: 1px solid #f0ede6; }
+  details.top .r { text-align: right; white-space: nowrap; }
+  details.top .warn { color: #b03030; font-weight: 600; }
+  details.top .src { font-size: 0.72rem; color: #aaa; margin-bottom: 4px; }
   .hint { font-size: 0.82rem; color: #999; text-align: center; margin-top: 8px; }
   footer { text-align: center; color: #999; font-size: 0.85rem; padding: 24px; }
 </style>
@@ -57,6 +67,7 @@
       <div class="info"><b>Brack</b><span>brack.ch · Kundennummer 3988141</span></div>
       <a class="go" href="https://www.brack.ch/login" target="_blank" rel="noopener">Shop öffnen ↗</a>
     </div>
+    <details class="top"><summary>Top-Artikel anzeigen</summary><div class="src">Kostenanalyse 09.07.26 · 89 Rechnungen Dez 24 – Jun 26</div><table><tr><th>Artikel</th><th>Bestellungen</th><th>Menge</th><th>Kosten CHF</th></tr><tr><td>CoffeeB Balls Lungo Forte</td><td class="r">7×</td><td class="r">90 Pkg</td><td class="r">693</td></tr><tr><td>CoffeeB Balls Espresso Forte</td><td class="r">4×</td><td class="r">110 Pkg</td><td class="r">756</td></tr><tr><td>Wasserkocher (FURBER/Severin)</td><td class="r">3×</td><td class="r">45 Stk</td><td class="r">961</td></tr><tr><td class="warn">Ventilatoren ⚠ jeweils Ende Juni — früher bündeln</td><td class="r">3×</td><td class="r">20 Stk</td><td class="r">1'874</td></tr><tr><td>Haartrockner</td><td class="r">4×</td><td class="r">20 Stk</td><td class="r">485</td></tr><tr><td>Batterien / Leuchtmittel / Kleinmaterial</td><td class="r">laufend</td><td class="r">—</td><td class="r">—</td></tr></table></details>
   </div>
 
   <div class="box">
@@ -79,6 +90,7 @@
       <div class="info"><b>Saviva / Transgourmet</b><span>integrale.ch · Kundennummer 9666003</span></div>
       <a class="go" href="https://www.integrale.ch/de/warenkorb" target="_blank" rel="noopener">Shop öffnen ↗</a>
     </div>
+    <details class="top"><summary>Top-Artikel anzeigen</summary><div class="src">Kostenanalyse 09.07.26 · 146 Rechnungen Aug 24 – Aug 25 · Top 10 = ~40% des Volumens</div><table><tr><th>Artikel</th><th>In Rechnungen</th><th>Menge/Jahr</th><th>Letzter Preis</th><th>CHF/Jahr</th></tr><tr><td class="warn">EIFIX Rührei-Mix 1kg ⚠ +16%</td><td class="r">69</td><td class="r">1'454 BR</td><td class="r">6.04</td><td class="r">8'335</td></tr><tr><td>K&S Tischbrötli TK</td><td class="r">57</td><td class="r">18'500 Stk</td><td class="r">0.40</td><td class="r">7'995</td></tr><tr><td>LUFRUTTA Orangensaft 1l</td><td class="r">62</td><td class="r">2'640 BR</td><td class="r">1.95</td><td class="r">5'600</td></tr><tr><td>Edamer Block ~2.5kg</td><td class="r">54</td><td class="r">331 kg</td><td class="r">14.07</td><td class="r">4'908</td></tr><tr><td>Trutenbrust ger./gek.</td><td class="r">40</td><td class="r">257 kg</td><td class="r">16.49</td><td class="r">4'865</td></tr><tr><td>JOWA Buttergipfel TK</td><td class="r">35</td><td class="r">9'280 Stk</td><td class="r">0.45</td><td class="r">4'536</td></tr><tr><td>Salami Milano 1kg</td><td class="r">80</td><td class="r">248 kg</td><td class="r">16.68</td><td class="r">4'239</td></tr><tr><td>UHT-Vollmilch 1l</td><td class="r">65</td><td class="r">3'072 l</td><td class="r">1.28</td><td class="r">3'932</td></tr><tr><td>Butter-Portionen 96×10g</td><td class="r">62</td><td class="r">159 PAK</td><td class="r">19.40</td><td class="r">3'085</td></tr><tr><td>Joghurt Erdbeer/Nature</td><td class="r">75</td><td class="r">—</td><td class="r">—</td><td class="r">—</td></tr></table></details>
   </div>
 
   <div class="box">
@@ -88,6 +100,7 @@
       <div class="info"><b>Webstar</b><span>webstar.ch · Bestellung via My WEBSTAR</span></div>
       <a class="go" href="https://www.webstar.ch/" target="_blank" rel="noopener">Shop öffnen ↗</a>
     </div>
+    <details class="top"><summary>Top-Artikel anzeigen</summary><div class="src">Kostenanalyse 09.07.26 · 45 Rechnungen Aug 24 – Jul 26 · ⚠ Bestellungen bündeln: 2'768 CHF Transportkosten</div><table><tr><th>Artikel</th><th>Bestellungen</th><th>Menge</th><th>Letzter Preis</th><th>CHF total</th></tr><tr><td>All-in-One Hair/Hand/Body 300ml</td><td class="r">8×</td><td class="r">840 Fl.</td><td class="r">5.25</td><td class="r">5'219</td></tr><tr><td>WC-Papier Excellence</td><td class="r">21×</td><td class="r">6'552 Ro.</td><td class="r">0.50</td><td class="r">3'246</td></tr><tr><td>Vanity-Set (Wattepads)</td><td class="r">13×</td><td class="r">12'000 Stk</td><td class="r">0.22</td><td class="r">2'640</td></tr><tr><td class="warn">Duschgel-Sachets 12ml ⚠ 28 Einzelbestellungen</td><td class="r">28×</td><td class="r">23'400 Stk</td><td class="r">0.099</td><td class="r">2'226</td></tr><tr><td>Apex POWER Reiniger</td><td class="r">9×</td><td class="r">36 Geb.</td><td class="r">~65.00</td><td class="r">2'272</td></tr><tr><td>Seife BE DIFFERENT Flowpack</td><td class="r">15×</td><td class="r">13'200 Stk</td><td class="r">0.15</td><td class="r">2'058</td></tr><tr><td>Kosmetiktücher</td><td class="r">25×</td><td class="r">2'600 Pak</td><td class="r">0.75</td><td class="r">1'860</td></tr><tr><td>Kehrichtsäcke 110l</td><td class="r">13×</td><td class="r">600 Stk</td><td class="r">1.50</td><td class="r">824</td></tr><tr><td class="warn">WC-Papier Tork extraweich ⚠ 3× Standardpreis</td><td class="r">1×</td><td class="r">576 Ro.</td><td class="r">1.41</td><td class="r">814</td></tr></table></details>
   </div>
 
   <div class="box">
@@ -97,6 +110,7 @@
       <div class="info"><b>Elis</b><span>Kundenportal MyElis</span></div>
       <a class="go" href="https://myelis.elis.com/" target="_blank" rel="noopener">Portal öffnen ↗</a>
     </div>
+    <details class="top"><summary>Top-Artikel anzeigen</summary><div class="src">Kostenanalyse 09.07.26 · Mär 25 – Jun 26 · ~240k CHF/Jahr · Stückpreise stabil, ⚠ Öko-Zuschlag 3.5% ≈ 9'860 CHF</div><table><tr><th>Artikel</th><th>Stückpreis</th><th>Menge (16 Mte)</th><th>CHF</th><th>Anteil</th></tr><tr><td>Duvetbezug 160×210</td><td class="r">2.38</td><td class="r">~48'000</td><td class="r">114'335</td><td class="r">39%</td></tr><tr><td>Fixleintuch 100×200</td><td class="r">1.76</td><td class="r">~33'100</td><td class="r">58'319</td><td class="r">20%</td></tr><tr><td>Duschtuch 70×140</td><td class="r">0.98–1.35</td><td class="r">30'850</td><td class="r">30'818</td><td class="r">10%</td></tr><tr><td>Kissenbezug 60×90</td><td class="r">0.44</td><td class="r">~48'900</td><td class="r">21'536</td><td class="r">7%</td></tr><tr><td>Fixleintuch 160×200</td><td class="r">2.38</td><td class="r">7'590</td><td class="r">18'064</td><td class="r">6%</td></tr><tr><td>Handtuch 50×80/90</td><td class="r">0.59–1.00</td><td class="r">26'810</td><td class="r">16'503</td><td class="r">6%</td></tr><tr><td>Badematte 49×70</td><td class="r">0.73</td><td class="r">15'410</td><td class="r">11'249</td><td class="r">4%</td></tr></table></details>
   </div>
 
   <div class="box">
@@ -106,6 +120,7 @@
       <div class="info"><b>Turm Kaffee</b><span>Bestellung per Mail an h.greter@turmkaffee.ch — Vorlage öffnet sich, nur Anzahl einsetzen</span></div>
       <a class="go" href="mailto:h.greter@turmkaffee.ch?subject=Bestellung%20Kaffee%20%E2%80%93%20Amanthos%20Hotel%20AG&body=Guten%20Tag%20Herr%20Greter%0A%0AGerne%20bestellen%20wir%20wie%20folgt%3A%0A%0A-%20Kaffeebohnen%3A%20%5BANZAHL%5D%20kg%0A-%20Lieferadresse%3A%20%5BSTANDORT%5D%0A%0ABesten%20Dank%20und%20freundliche%20Gruesse%0AAmanthos%20Hotel%20AG">Bestell-Mail ✉</a>
     </div>
+    <details class="top"><summary>Top-Artikel anzeigen</summary><div class="src">Kostenanalyse 09.07.26 · 516 kg in 22 Mten · Ø 18 kg alle ~23 Tage</div><table><tr><th>Artikel</th><th>Kanal</th><th>Preis/kg</th><th>Hinweis</th></tr><tr><td>Mokka Bohnen 1kg (12er)</td><td class="r">Turm direkt</td><td class="r">13.50</td><td class="r">Standard — hier bestellen</td></tr><tr><td class="warn">Mokka via Lyreco ⚠</td><td class="r">Lyreco</td><td class="r">16.90</td><td class="r">+25% — Kanal stoppen</td></tr><tr><td class="warn">Edel via Lyreco ⚠</td><td class="r">Lyreco</td><td class="r">26.95</td><td class="r">doppelter Preis</td></tr><tr><td class="warn">Turm E-Shop ⚠</td><td class="r">E-Shop</td><td class="r">19.92</td><td class="r">+48% — meiden</td></tr></table></details>
   </div>
 
   <p class="hint">Login jeweils mit dem Amanthos-Firmenkonto — Zugangsdaten im Passwort-Manager.<br>
