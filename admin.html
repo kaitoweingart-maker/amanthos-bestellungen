@@ -31,6 +31,16 @@
 </style>
 </head>
 <body>
+<div id="gate" style="position:fixed;inset:0;background:#f2f0eb;z-index:100;display:flex;align-items:center;justify-content:center;padding:16px;">
+  <div style="background:#fff;border-radius:12px;padding:32px 28px;max-width:360px;width:100%;text-align:center;box-shadow:0 2px 12px rgba(26,26,46,0.12);">
+    <h2 style="font-size:1.2rem;margin-bottom:6px;">🔒 Bestellungen – Admin</h2>
+    <p style="font-size:0.88rem;color:#888;margin-bottom:18px;">Bitte Passwort eingeben</p>
+    <input type="password" id="gatePw" inputmode="numeric" autocomplete="off" placeholder="Passwort"
+      style="width:100%;padding:12px;border:1px solid #ccc;border-radius:8px;font-size:1.1rem;text-align:center;letter-spacing:4px;">
+    <button id="gateBtn" style="width:100%;margin-top:12px;padding:13px;background:#b8963e;color:#fff;border:none;border-radius:8px;font-size:1rem;font-weight:700;cursor:pointer;">Öffnen</button>
+    <p id="gateErr" style="display:none;color:#b03030;font-size:0.85rem;margin-top:10px;">Falsches Passwort.</p>
+  </div>
+</div>
 <header>
   <h1>🔑 Bestellungen – Admin</h1>
   <p>Lieferanten-Shops &amp; Bestellauslösung · Amanthos AG</p>
@@ -104,6 +114,37 @@
 <footer>Amanthos AG · Früemattli 1 · 6404 Greppen · Bestellportal V2.1</footer>
 
 <script>
+// ── Passwort-Gate (Hash-Vergleich; nach erster Eingabe dauerhaft angemeldet) ──
+const GATE_HASH = '6161b2838ffa6ce17b84db3b45b4f8437855ecf43e75de2d1ad0008eaae91aa0';
+async function sha256(s) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(s));
+  return [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2, '0')).join('');
+}
+async function tryUnlock(pw) {
+  if (await sha256(pw) === GATE_HASH) {
+    localStorage.setItem('amanthos-admin-ok', GATE_HASH);
+    document.getElementById('gate').remove();
+    return true;
+  }
+  return false;
+}
+(function initGate() {
+  if (localStorage.getItem('amanthos-admin-ok') === GATE_HASH) {
+    document.getElementById('gate').remove();
+    return;
+  }
+  const pw = document.getElementById('gatePw');
+  const submit = async () => {
+    if (!(await tryUnlock(pw.value.trim()))) {
+      document.getElementById('gateErr').style.display = 'block';
+      pw.value = ''; pw.focus();
+    }
+  };
+  document.getElementById('gateBtn').onclick = submit;
+  pw.addEventListener('keydown', e => { if (e.key === 'Enter') submit(); });
+  pw.focus();
+})();
+
 // Banner nach Redirect vom Bestätigungslink (?id=…&loc=…&status=ok|already)
 const p = new URLSearchParams(location.search);
 const id = (p.get('id') || '').slice(0, 40);
