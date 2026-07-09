@@ -163,6 +163,8 @@
     </select>
     <label data-i18n="name">Name</label>
     <input type="text" id="name" autocomplete="name">
+    <label data-i18n="email">E-Mail (für die Bestell-Bestätigung)</label>
+    <input type="text" id="email" autocomplete="email" inputmode="email" placeholder="name@beispiel.ch">
   </div>
 
   <div id="categories"></div>
@@ -192,7 +194,7 @@
     <a href="pdf/bestellung-waesche.pdf" data-i18n="catLinen">Wäsche</a>
   </p>
 </main>
-<footer>Amanthos AG · Früemattli 1 · 6404 Greppen</footer>
+<footer>Amanthos AG · Früemattli 1 · 6404 Greppen · Bestellportal V2.1</footer>
 
 <script>
 const API = 'https://amanthos-website-api.onrender.com';
@@ -204,6 +206,8 @@ const I18N = {
     location: 'Objekt / Standort',
     locationPick: '— Bitte wählen —',
     name: 'Name',
+    email: 'E-Mail (für die Bestell-Bestätigung)',
+    errEmail: 'Bitte eine gültige E-Mail-Adresse angeben.',
     catBreakfast: '🥐 Frühstück',
     catCleaning: '🧴 Reinigungsmaterial',
     catLinen: '🛏️ Wäsche',
@@ -227,6 +231,8 @@ const I18N = {
     location: 'Property / location',
     locationPick: '— Please select —',
     name: 'Name',
+    email: 'E-mail (for the order confirmation)',
+    errEmail: 'Please enter a valid e-mail address.',
     catBreakfast: '🥐 Breakfast',
     catCleaning: '🧴 Cleaning supplies',
     catLinen: '🛏️ Linen',
@@ -250,6 +256,8 @@ const I18N = {
     location: 'Obiekt / lokalizacja',
     locationPick: '— Wybierz —',
     name: 'Imię i nazwisko',
+    email: 'E-mail (do potwierdzenia zamówienia)',
+    errEmail: 'Podaj prawidłowy adres e-mail.',
     catBreakfast: '🥐 Śniadanie',
     catCleaning: '🧴 Środki czystości',
     catLinen: '🛏️ Pościel i ręczniki',
@@ -475,7 +483,11 @@ function showMsg(cls, text) {
 document.getElementById('submit').onclick = async () => {
   const location = document.getElementById('location').value.trim();
   const name = document.getElementById('name').value.trim();
+  const email = document.getElementById('email').value.trim();
   if (!location || !name) { showMsg('err', t('errFields')); return; }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) { showMsg('err', t('errEmail')); return; }
+  localStorage.setItem('amanthos-bestell-name', name);
+  localStorage.setItem('amanthos-bestell-email', email);
 
   const items = [];
   CATALOGUE.forEach((cat, ci) => {
@@ -501,7 +513,7 @@ document.getElementById('submit').onclick = async () => {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        language: lang, location, name, items, photos: photoPayload,
+        language: lang, location, name, email, items, photos: photoPayload,
         remarks: document.getElementById('remarks').value.trim(),
       }),
       signal: ctrl.signal,
@@ -529,6 +541,8 @@ document.querySelectorAll('.lang button').forEach(b => {
   b.onclick = () => { lang = b.dataset.lang; localStorage.setItem('amanthos-lang', lang); applyLang(); };
 });
 
+document.getElementById('name').value = localStorage.getItem('amanthos-bestell-name') || '';
+document.getElementById('email').value = localStorage.getItem('amanthos-bestell-email') || '';
 buildCategories();
 applyLang();
 

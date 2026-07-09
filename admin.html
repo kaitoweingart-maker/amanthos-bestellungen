@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Amanthos – Bestellungen Admin</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background: #f2f0eb; color: #1a1a2e; min-height: 100vh; }
+  header { background: #1a1a2e; color: #fff; padding: 28px 20px 24px; text-align: center; }
+  header h1 { font-size: 1.5rem; font-weight: 700; letter-spacing: 0.5px; }
+  header p { color: #b8963e; margin-top: 6px; font-size: 0.9rem; }
+  main { max-width: 640px; margin: 0 auto; padding: 20px 16px 64px; }
+  .banner { padding: 16px 18px; border-radius: 10px; margin-bottom: 18px; font-size: 0.95rem; display: none; }
+  .banner.ok { background: #e8f6ee; color: #1e7d45; border-left: 4px solid #1e7d45; display: block; }
+  .banner.warn { background: #fdf6e6; color: #8a6d1f; border-left: 4px solid #b8963e; display: block; }
+  .box { background: #fff; border-radius: 10px; padding: 20px; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(26,26,46,0.08); }
+  .box h2 { font-size: 1.05rem; margin-bottom: 4px; }
+  .box p.cat { font-size: 0.8rem; color: #999; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+  .supplier { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 0; border-bottom: 1px solid #f0ede6; }
+  .supplier:last-child { border-bottom: none; }
+  .supplier .info { flex: 1; }
+  .supplier .info b { font-size: 0.98rem; }
+  .supplier .info span { display: block; font-size: 0.82rem; color: #888; margin-top: 2px; }
+  .supplier a.go { flex-shrink: 0; background: #1a1a2e; color: #fff; text-decoration: none; padding: 10px 16px; border-radius: 8px; font-size: 0.9rem; font-weight: 700; white-space: nowrap; }
+  .supplier a.go:hover { background: #b8963e; }
+  .order-link { display: block; text-align: center; background: #b8963e; color: #fff; text-decoration: none; padding: 15px; border-radius: 10px; font-size: 1.05rem; font-weight: 700; margin-bottom: 16px; }
+  .hint { font-size: 0.82rem; color: #999; text-align: center; margin-top: 8px; }
+  footer { text-align: center; color: #999; font-size: 0.85rem; padding: 24px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>🔑 Bestellungen – Admin</h1>
+  <p>Lieferanten-Shops &amp; Bestellauslösung · Amanthos AG</p>
+</header>
+<main>
+  <div class="banner" id="banner"></div>
+
+  <a class="order-link" href="index.html">📝 Neue Bestellung erfassen (Bestellformular)</a>
+
+  <div class="box">
+    <h2>Allgemein</h2>
+    <p class="cat">Büro · Technik · Verbrauchsmaterial</p>
+    <div class="supplier">
+      <div class="info"><b>Brack</b><span>brack.ch · Kundennummer 3988141</span></div>
+      <a class="go" href="https://www.brack.ch/login" target="_blank" rel="noopener">Shop öffnen ↗</a>
+    </div>
+  </div>
+
+  <div class="box">
+    <h2>Handwerker</h2>
+    <p class="cat">Baumarkt · Werkzeug · Material</p>
+    <div class="supplier">
+      <div class="info"><b>Jumbo</b><span>Interlaken · jumbo.ch</span></div>
+      <a class="go" href="https://www.jumbo.ch/de/login" target="_blank" rel="noopener">Shop öffnen ↗</a>
+    </div>
+    <div class="supplier">
+      <div class="info"><b>Hornbach</b><span>Affoltern · hornbach.ch</span></div>
+      <a class="go" href="https://www.hornbach.ch/mein-konto/" target="_blank" rel="noopener">Shop öffnen ↗</a>
+    </div>
+  </div>
+
+  <div class="box">
+    <h2>Lebensmittel</h2>
+    <p class="cat">Frühstück · F&amp;B</p>
+    <div class="supplier">
+      <div class="info"><b>Saviva / Transgourmet</b><span>shop.transgourmet.ch · Kundennummer 9666003</span></div>
+      <a class="go" href="https://shop.transgourmet.ch/" target="_blank" rel="noopener">Shop öffnen ↗</a>
+    </div>
+  </div>
+
+  <div class="box">
+    <h2>Hygiene</h2>
+    <p class="cat">Reinigung · Verbrauchsmaterial</p>
+    <div class="supplier">
+      <div class="info"><b>Webstar</b><span>webstar.ch · Bestellung via My WEBSTAR</span></div>
+      <a class="go" href="https://www.webstar.ch/" target="_blank" rel="noopener">Shop öffnen ↗</a>
+    </div>
+  </div>
+
+  <div class="box">
+    <h2>Wäsche</h2>
+    <p class="cat">Leinen · Frottee (Mietwäsche)</p>
+    <div class="supplier">
+      <div class="info"><b>Elis</b><span>Kundenportal my.elis.com</span></div>
+      <a class="go" href="https://my.elis.com/" target="_blank" rel="noopener">Portal öffnen ↗</a>
+    </div>
+  </div>
+
+  <div class="box">
+    <h2>Kaffee</h2>
+    <p class="cat">Kaffee · Zubehör</p>
+    <div class="supplier">
+      <div class="info"><b>Turm Kaffee</b><span>turmkaffee.ch</span></div>
+      <a class="go" href="https://www.turmkaffee.ch/" target="_blank" rel="noopener">Shop öffnen ↗</a>
+    </div>
+  </div>
+
+  <p class="hint">Login jeweils mit dem Amanthos-Firmenkonto — Zugangsdaten im Passwort-Manager.<br>
+  Diese Seite ist nicht öffentlich verlinkt und für Suchmaschinen gesperrt.</p>
+</main>
+<footer>Amanthos AG · Früemattli 1 · 6404 Greppen · Bestellportal V2.1</footer>
+
+<script>
+// Banner nach Redirect vom Bestätigungslink (?id=…&loc=…&status=ok|already)
+const p = new URLSearchParams(location.search);
+const id = (p.get('id') || '').slice(0, 40);
+const loc = (p.get('loc') || '').slice(0, 120);
+const status = p.get('status');
+const banner = document.getElementById('banner');
+if (status === 'ok' && id) {
+  banner.className = 'banner ok';
+  banner.textContent = `✓ Bestellung ${id}${loc ? ' (' + loc + ')' : ''} wurde als bestellt bestätigt. ` +
+    'Alle Empfänger und der/die Besteller:in wurden per E-Mail benachrichtigt. ' +
+    'Unten kannst du die Bestellung direkt bei den Lieferanten auslösen.';
+} else if (status === 'already' && id) {
+  banner.className = 'banner warn';
+  banner.textContent = `Bestellung ${id} war bereits bestätigt — die Bestätigung wurde erneut versendet.`;
+}
+</script>
+</body>
+</html>
