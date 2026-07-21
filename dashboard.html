@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Bestell-Dashboard — Amanthos</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: Helvetica, Arial, sans-serif;
+    background: #f2f0eb;
+    color: #1a1a2e;
+    min-height: 100vh;
+  }
+  header {
+    background: #1a1a2e;
+    padding: 22px 20px;
+    text-align: center;
+  }
+  header h1 { color: #fff; font-size: 1.25rem; }
+  header p { color: #b8963e; margin-top: 6px; font-size: 0.85rem; }
+  main { max-width: 1080px; margin: 0 auto; padding: 20px 16px 60px; }
+
+  .toolbar {
+    display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    background: #fff; border-radius: 10px; padding: 14px 16px;
+    box-shadow: 0 1px 3px rgba(26,26,46,.08); margin-bottom: 14px;
+  }
+  .toolbar select, .toolbar input[type=search] {
+    padding: 9px 12px; border: 1px solid #ddd; border-radius: 8px;
+    font-size: 0.9rem; background: #fff; color: #1a1a2e;
+  }
+  .toolbar input[type=search] { flex: 1; min-width: 160px; }
+  .chip {
+    padding: 7px 14px; border-radius: 999px; font-size: 0.85rem; font-weight: 700;
+    white-space: nowrap;
+  }
+  .chip.open { background: #fdeaea; color: #b03030; }
+  .chip.done { background: #e8f6ee; color: #1e7d45; }
+  .refresh {
+    margin-left: auto; background: transparent; border: 1px solid #ccc;
+    border-radius: 8px; padding: 8px 14px; cursor: pointer; font-size: 0.85rem; color: #555;
+  }
+  .refresh:hover { border-color: #b8963e; color: #1a1a2e; }
+
+  .order {
+    background: #fff; border-radius: 10px; margin-bottom: 10px;
+    box-shadow: 0 1px 3px rgba(26,26,46,.08); overflow: hidden;
+    border-left: 5px solid #c0392b;
+  }
+  .order.done { border-left-color: #1e7d45; }
+  .order-head {
+    display: flex; flex-wrap: wrap; gap: 6px 16px; align-items: center;
+    padding: 14px 16px; cursor: pointer;
+  }
+  .order-head .when { color: #888; font-size: 0.8rem; min-width: 110px; }
+  .order-head .loc { font-weight: 700; font-size: 0.95rem; }
+  .order-head .who { color: #555; font-size: 0.88rem; }
+  .order-head .oid { color: #aaa; font-size: 0.75rem; font-family: monospace; }
+  .order-head .items-n { color: #888; font-size: 0.82rem; }
+  .badge {
+    margin-left: auto; padding: 5px 12px; border-radius: 999px;
+    font-size: 0.78rem; font-weight: 700; letter-spacing: .3px;
+  }
+  .badge.open { background: #fdeaea; color: #b03030; }
+  .badge.done { background: #e8f6ee; color: #1e7d45; }
+  .order-body { display: none; padding: 0 16px 14px; }
+  .order.expanded .order-body { display: block; }
+  .order-body table { width: 100%; border-collapse: collapse; font-size: 0.86rem; margin-top: 4px; }
+  .order-body th {
+    text-align: left; background: #f2f0eb; padding: 7px 10px;
+    font-size: 0.72rem; color: #666; text-transform: uppercase; letter-spacing: .4px;
+  }
+  .order-body td { padding: 7px 10px; border-bottom: 1px solid #f0eee9; }
+  .order-body td.qty { text-align: right; font-weight: 700; white-space: nowrap; }
+  .remarks { margin-top: 10px; background: #f8f6f2; border-radius: 8px; padding: 10px 12px; font-size: 0.84rem; color: #555; }
+  .meta-line { margin-top: 10px; font-size: 0.78rem; color: #999; }
+  .actions { margin-top: 12px; display: flex; gap: 10px; }
+  .btn {
+    border: none; border-radius: 8px; padding: 10px 18px; font-size: 0.88rem;
+    font-weight: 700; cursor: pointer;
+  }
+  .btn.mark-done { background: #1e7d45; color: #fff; }
+  .btn.mark-open { background: #fff; color: #b03030; border: 1px solid #e5b4b4; }
+  .btn[disabled] { opacity: .55; cursor: wait; }
+
+  .empty, .notice {
+    background: #fff; border-radius: 10px; padding: 26px; text-align: center;
+    color: #888; font-size: 0.92rem; box-shadow: 0 1px 3px rgba(26,26,46,.08);
+  }
+  .notice.error { color: #b03030; }
+
+  /* Login */
+  #login {
+    max-width: 380px; margin: 60px auto; background: #fff; border-radius: 12px;
+    padding: 30px; box-shadow: 0 2px 8px rgba(26,26,46,.10); text-align: center;
+  }
+  #login h2 { font-size: 1.05rem; margin-bottom: 6px; }
+  #login p { color: #888; font-size: 0.85rem; margin-bottom: 16px; }
+  #login input {
+    width: 100%; padding: 11px 12px; border: 1px solid #ddd; border-radius: 8px;
+    font-size: 0.95rem; margin-bottom: 12px;
+  }
+  #login button {
+    width: 100%; background: #b8963e; color: #fff; border: none; border-radius: 8px;
+    padding: 12px; font-size: 0.95rem; font-weight: 700; cursor: pointer;
+  }
+  #login .err { color: #b03030; font-size: 0.82rem; margin-top: 10px; display: none; }
+  footer { text-align: center; padding: 20px; font-size: 0.78rem; color: #aaa; }
+  footer a { color: #b8963e; }
+  @media (max-width: 640px) {
+    .order-head .oid { display: none; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>Bestell-Dashboard</h1>
+  <p>Amanthos Bestellportal · Management-Übersicht</p>
+</header>
+
+<main>
+  <div id="login">
+    <h2>Zugangscode</h2>
+    <p>Bitte den Management-Zugangscode eingeben.</p>
+    <input type="password" id="keyInput" placeholder="Zugangscode" autocomplete="current-password">
+    <button onclick="saveKey()">Anmelden</button>
+    <div class="err" id="loginErr">Code ungültig — bitte nochmals versuchen.</div>
+  </div>
+
+  <div id="app" style="display:none">
+    <div class="toolbar">
+      <span class="chip open" id="chipOpen">– offen</span>
+      <span class="chip done" id="chipDone">– bestellt</span>
+      <select id="fLoc"><option value="">Alle Standorte</option></select>
+      <select id="fStatus">
+        <option value="">Alle Status</option>
+        <option value="offen">🔴 Offen</option>
+        <option value="bestellt">✅ Bestellt</option>
+      </select>
+      <input type="search" id="fSearch" placeholder="Suchen (Artikel, Besteller, ID …)">
+      <button class="refresh" onclick="load()">↻ Aktualisieren</button>
+    </div>
+    <div id="list"></div>
+  </div>
+</main>
+
+<footer>
+  <a href="index.html">→ Bestellportal</a> &nbsp;·&nbsp; <a href="admin.html">→ Lieferanten-Shops</a>
+</footer>
+
+<script>
+const API = 'https://amanthos-website-api.onrender.com';
+const KEY_STORE = 'supplyDashKey';
+let ORDERS = [];
+
+function getKey() { return localStorage.getItem(KEY_STORE) || ''; }
+
+function saveKey() {
+  const v = document.getElementById('keyInput').value.trim();
+  if (!v) return;
+  localStorage.setItem(KEY_STORE, v);
+  document.getElementById('loginErr').style.display = 'none';
+  load();
+}
+
+function showLogin(invalid) {
+  document.getElementById('app').style.display = 'none';
+  document.getElementById('login').style.display = 'block';
+  document.getElementById('loginErr').style.display = invalid ? 'block' : 'none';
+}
+
+function esc(s) {
+  return String(s ?? '').replace(/[&<>"']/g, c =>
+    ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+function fmtDate(iso) {
+  if (!iso) return '—';
+  const d = new Date(iso);
+  return d.toLocaleDateString('de-CH', {day:'2-digit', month:'2-digit', year:'2-digit'})
+    + ' ' + d.toLocaleTimeString('de-CH', {hour:'2-digit', minute:'2-digit'});
+}
+
+async function load() {
+  const key = getKey();
+  if (!key) return showLogin(false);
+  let res;
+  try {
+    res = await fetch(API + '/api/supply-orders/list', {headers: {'X-API-Key': key}});
+  } catch {
+    document.getElementById('list').innerHTML =
+      '<div class="notice error">API nicht erreichbar — bitte kurz warten (Render startet auf) und «Aktualisieren» klicken.</div>';
+    document.getElementById('app').style.display = 'block';
+    document.getElementById('login').style.display = 'none';
+    return;
+  }
+  if (res.status === 403) { localStorage.removeItem(KEY_STORE); return showLogin(true); }
+  document.getElementById('login').style.display = 'none';
+  document.getElementById('app').style.display = 'block';
+  if (res.status === 503) {
+    document.getElementById('list').innerHTML =
+      '<div class="notice error">Bestell-Datenbank noch nicht konfiguriert (Supabase-Zugang fehlt auf dem Server).</div>';
+    return;
+  }
+  const data = await res.json();
+  ORDERS = data.orders || [];
+  buildLocFilter();
+  render();
+}
+
+function buildLocFilter() {
+  const sel = document.getElementById('fLoc');
+  const cur = sel.value;
+  const locs = [...new Set(ORDERS.map(o => o.location))].sort();
+  sel.innerHTML = '<option value="">Alle Standorte</option>' +
+    locs.map(l => `<option${l === cur ? ' selected' : ''}>${esc(l)}</option>`).join('');
+}
+
+function render() {
+  const fLoc = document.getElementById('fLoc').value;
+  const fStatus = document.getElementById('fStatus').value;
+  const q = document.getElementById('fSearch').value.trim().toLowerCase();
+
+  const openN = ORDERS.filter(o => o.status !== 'bestellt').length;
+  document.getElementById('chipOpen').textContent = `${openN} offen`;
+  document.getElementById('chipDone').textContent = `${ORDERS.length - openN} bestellt`;
+
+  const rows = ORDERS.filter(o => {
+    if (fLoc && o.location !== fLoc) return false;
+    if (fStatus && o.status !== fStatus) return false;
+    if (q) {
+      const hay = [o.order_id, o.location, o.requester, o.email, o.remarks,
+        ...(o.items || []).map(i => i.article + ' ' + i.category)].join(' ').toLowerCase();
+      if (!hay.includes(q)) return false;
+    }
+    return true;
+  });
+
+  const list = document.getElementById('list');
+  if (!rows.length) {
+    list.innerHTML = '<div class="empty">Keine Bestellungen gefunden.</div>';
+    return;
+  }
+  list.innerHTML = rows.map(o => {
+    const done = o.status === 'bestellt';
+    const items = (o.items || []);
+    const itemRows = items.map(i =>
+      `<tr><td style="color:#888">${esc(i.category)}</td><td>${esc(i.article)}</td><td class="qty">${esc(i.qty)}</td></tr>`
+    ).join('');
+    const confirmed = done
+      ? `<div class="meta-line">✅ Bestellt am ${fmtDate(o.confirmed_at)}${o.confirmed_via === 'dashboard' ? ' (manuell im Dashboard)' : o.confirmed_via === 'email-link' ? ' (per Mail-Link bestätigt)' : ''}</div>`
+      : '';
+    return `<div class="order ${done ? 'done' : ''}" id="o-${esc(o.order_id)}">
+      <div class="order-head" onclick="this.parentElement.classList.toggle('expanded')">
+        <span class="when">${fmtDate(o.created_at)}</span>
+        <span class="loc">${esc(o.location)}</span>
+        <span class="who">${esc(o.requester)}</span>
+        <span class="items-n">${items.length} Position${items.length === 1 ? '' : 'en'}</span>
+        <span class="oid">${esc(o.order_id)}</span>
+        <span class="badge ${done ? 'done' : 'open'}">${done ? '✅ BESTELLT' : '🔴 OFFEN'}</span>
+      </div>
+      <div class="order-body">
+        <table>
+          <tr><th>Kategorie</th><th>Artikel</th><th style="text-align:right">Menge</th></tr>
+          ${itemRows || '<tr><td colspan="3" style="color:#aaa">Keine Positionen (nur Fotos)</td></tr>'}
+        </table>
+        ${o.remarks ? `<div class="remarks">Bemerkungen: ${esc(o.remarks)}</div>` : ''}
+        ${o.email ? `<div class="meta-line">Besteller:in erreichbar unter ${esc(o.email)}</div>` : ''}
+        ${confirmed}
+        <div class="actions">
+          ${done
+            ? `<button class="btn mark-open" onclick="setStatus('${esc(o.order_id)}', 'offen', this)">Zurück auf OFFEN setzen</button>`
+            : `<button class="btn mark-done" onclick="setStatus('${esc(o.order_id)}', 'bestellt', this)">✓ Als BESTELLT markieren</button>`}
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+async function setStatus(orderId, status, btn) {
+  btn.disabled = true;
+  try {
+    const res = await fetch(API + '/api/supply-orders/status', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json', 'X-API-Key': getKey()},
+      body: JSON.stringify({orderId, status}),
+    });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const o = ORDERS.find(x => x.order_id === orderId);
+    if (o) {
+      const upd = (await res.json()).order || {};
+      Object.assign(o, {status}, upd);
+    }
+    render();
+  } catch (e) {
+    alert('Status konnte nicht gespeichert werden — bitte nochmals versuchen.');
+    btn.disabled = false;
+  }
+}
+
+['fLoc', 'fStatus'].forEach(id =>
+  document.getElementById(id).addEventListener('change', render));
+document.getElementById('fSearch').addEventListener('input', render);
+document.getElementById('keyInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter') saveKey();
+});
+
+fetch(API + '/health').catch(() => {});  // warm the Render free tier
+load();
+setInterval(() => { if (getKey()) load(); }, 60000);
+</script>
+</body>
+</html>
